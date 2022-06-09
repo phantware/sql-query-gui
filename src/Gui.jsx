@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App'
-import dummyData from './data/json/categories.json'
+import dummyData from './data/json/regions.json'
 
 const getCurrentQueryData = async (query) => {
   const url = `./data/json/${query}.json`
@@ -55,6 +55,7 @@ const Gui = (e) => {
             className='textareaContainer'
             onChange={(e) => setQuery(e.target.value)}
           ></textarea>
+          <br />
           <button className='btn' onClick={handleQuery}>
             GET QUERY
           </button>
@@ -72,7 +73,9 @@ const Gui = (e) => {
 }
 
 const Table = ({ payload }) => {
-  const columns = Object.keys(payload[0]).map((key) => ({ id: key }))
+  const columns = Object.keys(payload[0])
+    .filter((key) => !Array.isArray(payload[0][key]))
+    .map((key) => ({ id: key }))
   return (
     <table className='table'>
       <thead>
@@ -85,9 +88,13 @@ const Table = ({ payload }) => {
       <tbody>
         {payload.map((datum) => (
           <tr>
-            <td>{datum.categoryID}</td>
-            <td>{datum.description}</td>
-            <td>{datum.name} </td>
+            {columns.map((column) => (
+              <td>
+                {typeof datum[column.id] === 'object'
+                  ? datum[column.id][Object.keys(datum[column.id])[0]]
+                  : datum[column.id]}
+              </td>
+            ))}
           </tr>
         ))}
       </tbody>
