@@ -1,5 +1,12 @@
+import './App.css'
+import Gui from './Gui'
+
 function App() {
-  return <div className='App'>hello</div>
+  return (
+    <div className='appContainer'>
+      <Gui />
+    </div>
+  )
 }
 
 export default App
