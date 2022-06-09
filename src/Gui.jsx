@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './App'
 import dummyData from './data/json/regions.json'
+import Table from './Table'
 
 const getCurrentQueryData = async (query) => {
   const url = `./data/json/${query}.json`
@@ -65,6 +66,17 @@ const Gui = (e) => {
           <button className='btn' onClick={resetQuery}>
             RESET
           </button>
+          <label>Select to from the list:</label>
+          <select>
+            <option value='categories'>Categories</option>
+            <option value='customer'>Customer</option>
+            <option value='employees'>Employees</option>
+            <option value='orders'>Orders</option>
+            <option value='products'>Products</option>
+            <option value='regions'>Regions</option>
+            <option value='shippers'>Shippers</option>
+            <option value='suppliers'>Suppliers</option>
+          </select>
           {data.payload && <Table payload={data.payload} />}
         </form>
       </div>
@@ -72,33 +84,4 @@ const Gui = (e) => {
   )
 }
 
-const Table = ({ payload }) => {
-  const columns = Object.keys(payload[0])
-    .filter((key) => !Array.isArray(payload[0][key]))
-    .map((key) => ({ id: key }))
-  return (
-    <table className='table'>
-      <thead>
-        <tr>
-          {columns.map((column) => (
-            <th>{column.id}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {payload.map((datum) => (
-          <tr>
-            {columns.map((column) => (
-              <td>
-                {typeof datum[column.id] === 'object'
-                  ? datum[column.id][Object.keys(datum[column.id])[0]]
-                  : datum[column.id]}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  )
-}
 export default Gui

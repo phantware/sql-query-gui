@@ -62,3 +62,26 @@ h1 {
   background-color: #04aa6d;
   color: white;
 }
+
+label {
+  font-size: 20px;
+  padding: 20px;
+}
+select {
+  width: 20%;
+  font-size: 15px;
+  padding: 15px;
+  background-color: #04aa6d;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+}
+option {
+  font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+}
