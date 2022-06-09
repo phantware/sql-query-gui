@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App'
-import dummyData from './data/json/regions.json'
+import dummyData from './data/json/customers.json'
 import Table from './Table'
 
 const getCurrentQueryData = async (query) => {
@@ -57,14 +57,15 @@ const Gui = (e) => {
             onChange={(e) => setQuery(e.target.value)}
           ></textarea>
           <br />
-          <button className='btn' onClick={handleQuery}>
-            GET QUERY
-          </button>
-          <button className='btn' onClick={submitQuery}>
+          <button className='btn2' onClick={submitQuery}>
             SUBMIT
           </button>
-          <button className='btn' onClick={resetQuery}>
+          <button className='btn2' onClick={resetQuery}>
             RESET
+          </button>
+          <br />
+          <button className='btn' onClick={handleQuery}>
+            GET QUERY
           </button>
           <label>Select to from the list:</label>
           <select>
