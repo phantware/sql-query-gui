@@ -20,14 +20,17 @@ h1 {
 }
 
 .btn {
-  background-color: rgb(0, 55, 255);
+  background-color: #04aa6d;
   width: 15%;
   color: white;
   padding: 14px;
   border: none;
   margin-right: 10px;
+  margin-top: 20px;
   border-radius: 5px;
   cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
 }
 
 .table {
@@ -55,6 +58,6 @@ h1 {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: rgb(0, 55, 255);
+  background-color: #04aa6d;
   color: white;
 }
