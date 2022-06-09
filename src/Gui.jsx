@@ -2,14 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './App'
 import dummyData from './data/json/customers.json'
 import Table from './Table'
-
-const getCurrentQueryData = async (query) => {
-  const url = `./data/json/${query}.json`
-  console.log(url)
-  const res = await fetch(url)
-  const data = await res.json()
-  return data
-}
+import { getCurrentQueryData } from './services/query'
 
 const Gui = (e) => {
   const [query, setQuery] = useState('categories')
@@ -19,17 +12,15 @@ const Gui = (e) => {
     error: false,
   })
 
-  const handleQuery = async (e) => {
-    e.preventDefault()
+  const handleQuery = async (query) => {
+    console.log(query)
     try {
       setData({ loading: true })
-      // const data = await getCurrentQueryData(query)
-      const data = dummyData
+      const data = await getCurrentQueryData(query)
       setData({ payload: data })
     } catch (error) {
       console.log(error)
-      console.log(error)
-      setData({ error })
+      setData({ error: error.message })
     }
   }
   const resetQuery = (e) => {
@@ -41,12 +32,27 @@ const Gui = (e) => {
     // setQuery()
   }
 
-  useEffect(() => {}, [data.payload, data.error])
+  const [selectedQuery, setSelectedQuery] = React.useState('')
+  const handleChange = (event) => {
+    setSelectedQuery(event.target.value)
+  }
+  useEffect(() => {
+    if (data.error) {
+      alert('Something went wrong: ' + data.error)
+    }
+  }, [data.error])
+
+  // useEffect(() => {
+  //   if (selectedQuery) {
+  //     handleQuery()
+  //   }
+  // }, [selectedQuery])
+
   return (
     <div className='guiContainer'>
       <h1>SQL GUI </h1>
       <div className='formContainer'>
-        <form>
+        <div>
           <textarea
             name=''
             // value={query}
@@ -64,25 +70,34 @@ const Gui = (e) => {
             RESET
           </button>
           <br />
-          <button className='btn' onClick={handleQuery}>
+          <button className='btn' onClick={() => handleQuery(selectedQuery)}>
             GET QUERY
           </button>
           <label>Select to from the list:</label>
-          <select>
-            <option value='categories'>Categories</option>
-            <option value='customer'>Customer</option>
-            <option value='employees'>Employees</option>
-            <option value='orders'>Orders</option>
-            <option value='products'>Products</option>
-            <option value='regions'>Regions</option>
-            <option value='shippers'>Shippers</option>
-            <option value='suppliers'>Suppliers</option>
+
+          <select value={selectedQuery} onChange={handleChange}>
+            <option value=''>select</option>
+            {selectQueries_data.map((opt) => (
+              <option value={opt.value}>{opt.label}</option>
+            ))}
           </select>
+
           {data.payload && <Table payload={data.payload} />}
-        </form>
+        </div>
       </div>
     </div>
   )
 }
+
+const selectQueries_data = [
+  { value: 'categories', label: 'Categories' },
+  { value: 'customers', label: 'Customers' },
+  { value: 'employees', label: 'Employees' },
+  { value: 'orders', label: 'Orders' },
+  { value: 'products', label: 'Products' },
+  { value: 'regions', label: 'Regions' },
+  { value: 'shippers', label: 'Shippers' },
+  { value: 'suppliers', label: 'Suppliers' },
+]
 
 export default Gui
