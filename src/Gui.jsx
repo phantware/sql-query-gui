@@ -40,9 +40,7 @@ const Gui = (e) => {
     // setQuery()
   }
 
-  useEffect(() => {
-    console.log(data)
-  }, [data.payload, data.error])
+  useEffect(() => {}, [data.payload, data.error])
   return (
     <div className='guiContainer'>
       <h1>SQL GUI </h1>
@@ -66,30 +64,34 @@ const Gui = (e) => {
           <button className='btn' onClick={resetQuery}>
             RESET
           </button>
-          {data.payload && (
-            <table className='table'>
-              <thead>
-                <tr>
-                  <th>categoryID</th>
-                  <th>description</th>
-                  <th>name</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.payload.map((datum) => (
-                  <tr>
-                    <td>{datum.categoryID}</td>
-                    <td>{datum.description}</td>
-                    <td>{datum.name} </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          {data.payload && <Table payload={data.payload} />}
         </form>
       </div>
     </div>
   )
 }
 
+const Table = ({ payload }) => {
+  const columns = Object.keys(payload[0]).map((key) => ({ id: key }))
+  return (
+    <table className='table'>
+      <thead>
+        <tr>
+          {columns.map((column) => (
+            <th>{column.id}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {payload.map((datum) => (
+          <tr>
+            <td>{datum.categoryID}</td>
+            <td>{datum.description}</td>
+            <td>{datum.name} </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}
 export default Gui
