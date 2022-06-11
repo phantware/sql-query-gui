@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './App'
-import dummyData from './data/json/customers.json'
 import Table from './Table'
 import { getCurrentQueryData } from './services/query'
 
