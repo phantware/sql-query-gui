@@ -9,21 +9,6 @@ const Gui = (e) => {
     loading: false,
     error: false,
   })
-  const handleQuery = async (query, whereKey, whereValue) => {
-    console.log(query)
-    try {
-      setData({ loading: true })
-      let data = await getCurrentQueryData(query)
-      if (whereKey)
-        data = data.filter((user) => `${user[whereKey]}` === `${whereValue}`)
-      if (!data.length) alert('No Entries Found!')
-
-      setData({ payload: data })
-    } catch (error) {
-      console.log(error)
-      setData({ error: error.message })
-    }
-  }
 
   // textarea
   const [textAreaValue, setTextAreaValue] = React.useState('')
@@ -44,7 +29,7 @@ const Gui = (e) => {
     const query = textAreaValue.split(' ')[3]
     const whereKey = textAreaValue.split(' ')[5]
     const whereValue = textAreaValue.split(' ')[7]
-    handleQuery(query, whereKey, whereValue)
+    handleQuery(setData, query, whereKey, whereValue)
   }
 
   const resetQuery = (e) => {
@@ -92,7 +77,10 @@ const Gui = (e) => {
             RESET
           </button>
           <br />
-          <button className='btn' onClick={() => handleQuery(selectedQuery)}>
+          <button
+            className='btn'
+            onClick={() => handleQuery(setData, selectedQuery)}
+          >
             GET QUERY
           </button>
           <label>Select to from the list:</label>
@@ -107,6 +95,21 @@ const Gui = (e) => {
       </div>
     </div>
   )
+}
+const handleQuery = async (setData, query, whereKey, whereValue) => {
+  console.log(query)
+  try {
+    setData({ loading: true })
+    let data = await getCurrentQueryData(query)
+    if (whereKey)
+      data = data.filter((user) => `${user[whereKey]}` === `${whereValue}`)
+    if (!data.length) alert('No Entries Found!')
+
+    setData({ payload: data })
+  } catch (error) {
+    console.log(error)
+    setData({ error: error.message })
+  }
 }
 
 const selectQueries_data = [
