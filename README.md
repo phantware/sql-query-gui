@@ -15,7 +15,7 @@ Try out the website : [REACT SQL-Query-GUI Editor](https://sql-query-gui.netlify
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 
 :white_check_mark: User can write a Query and click submit to get data from the application .\
-:white_check_mark: Users can use the select option and click on Get Query to get a some selected record based on what the user select\
+:white_check_mark: Users can use the select option and click on Get Query to get a some selected record based on what the user select
 
 ## ✍️ Predefined SQL Queries
 
