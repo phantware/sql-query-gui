@@ -1,4 +1,4 @@
-# 🚀 REACT SQL-QUERY-QUI Editor
+# 🚀 REACT SQL-QUERY-GUI Editor
 
 This is a REACT SQL-Query-GUI Editor built using ReactJs, JSON Server and CSS.
 
