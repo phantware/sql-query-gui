@@ -28,6 +28,16 @@ Try out the website : [REACT SQL-Query-GUI Editor](https://sql-query-gui.netlify
 - `SELECT * from shippers`
 - `SELECT * from suppliers`
 
+- `SELECT * from shippers WHERE shipperID = 1`
+- `SELECT * from categories WHERE name = Condiments`
+- `SELECT * from customers WHERE customerID = AROUT`
+- `SELECT * from employees WHERE employeeID = 2`
+- `SELECT * from orders WHERE employeeID = 6`
+- `SELECT * from products WHERE productID = 4`
+- `SELECT * from regions WHERE name = Eastern`
+- `SELECT * from shippers WHERE shipperID = 3`
+- `SELECT * from suppliers WHERE supplierID = 7`
+
 ## ⏱ Page Load Time
 
 Page Load time of this website in desktop is in the range of 0.4 s to 0.6s.
